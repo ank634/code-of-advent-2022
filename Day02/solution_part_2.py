@@ -2,18 +2,13 @@ from typing import Final, TextIO
 
 
 def main() -> None:
-    WIN_POINTS: Final[int]  = 6 
-    DRAW_POINTS: Final[int] = 3
-    ROCK_POINTS: Final[int] = 1
-    PAPER_POINTS: Final[int] = 2
-    SCISSORS_POINTS: Final[int] = 3
     FILE_NAME: Final[str] = 'input.txt'
-    score: int = 0
+    score = 0
 
-    # look up table for all the values
+    # look up table for all possible games and the points associated for that game
     possible_scenarios: Final[dict[str, int]] = {
-                                                'A X': 3, 
-                                                'A Y': 4, 
+                                                'A X': 3,
+                                                'A Y': 4,
                                                 'A Z': 8, 
                                                 'B X': 1, 
                                                 'B Y': 5, 
@@ -47,4 +42,5 @@ def main() -> None:
 
 
 if __name__ == '__main__':
+    
     main()
