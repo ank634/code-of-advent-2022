@@ -3,7 +3,7 @@ from typing import Final, TextIO
 
 def main() -> None:
     FILE_NAME: Final[str] = 'input.txt'
-    score = 0
+    score: int = 0
 
     # look up table for all possible games and the points associated for that game
     possible_scenarios: Final[dict[str, int]] = {
