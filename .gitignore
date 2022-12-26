@@ -1,3 +1,4 @@
 # ignore the project file you should be using requirement file anyways
 project_env
 __pycache__
+.mypy_cache
