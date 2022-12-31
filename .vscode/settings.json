@@ -7,5 +7,5 @@
         "--show-column-numbers",
         "--strict"
     ],
-    "python.analysis.typeCheckingMode": "basic"
+    "python.analysis.typeCheckingMode": "off"
 }

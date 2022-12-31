@@ -1,14 +1,14 @@
 # Desc: Remove the new line at the end of line in a txt file
 # Param: The contents of one line of text from a txt file
 # Return: just the raw value of line as an int
-def parse_file_contents(content: str):
+def parse_file_contents(content: str) -> str:
     if len(content) > 1:
         content = int(content.replace('\n',''))
     return content
 
 # Desc: Parses the whole file and returns each line as an element in a list
-def parse_file(FILE: str):
-    file_contents = []
+def parse_file(FILE: str) -> list[str]:
+    file_contents: list[str] = []
     fp = None
 
     try:

@@ -1,6 +1,6 @@
 import solution_part_1
 
-def main():
+def main() -> None:
     INPUT_FILE = 'input.txt'
     FILE_CONTENT = solution_part_1.parse_file(INPUT_FILE)
 
