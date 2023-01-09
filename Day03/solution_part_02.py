@@ -1,4 +1,5 @@
 from typing import Final, TextIO
+import timeit
 
 
 def get_file_contents(file_name: str) -> list[str]:
@@ -6,11 +7,14 @@ def get_file_contents(file_name: str) -> list[str]:
     FILE_CONTENTS: Final[list[str]] = FILE_POINTER.readlines()
     FILE_POINTER.close()
 
+    # newlines at end of strings messes with data comparision so they are removed
     return list[str](map(lambda x: x.rstrip(), FILE_CONTENTS))
 
 def main() -> None:
     FILE_CONTENTS: Final[list[str]] = get_file_contents('input.txt')
-    LOOK_UP_TABLE: Final[dict[str, int]] = {                                            'a' : 1,
+    total_score: int = 0
+    LOOK_UP_TABLE: Final[dict[str, int]] =  {
+                                            'a' : 1,
                                             'b' : 2,
                                             'c' : 3,
                                             'd' : 4,
@@ -63,30 +67,31 @@ def main() -> None:
                                             'Y' : 51,
                                             'Z' : 52
                                             }
+    # the overal time complexity of this algorithm is O(nlog(n))
 
-    total_score: int = 0
-    member_one: set[str] = set()
-    member_two: set[str] = set()
-    member_three: set[str] = set()
-
-    print(FILE_CONTENTS[0])
-
+    # outer loop O(log(n)) time complexity
     for i in range(0, len(FILE_CONTENTS)-2, 3):
+        member_one: set[str] = set()
+        member_two: set[str] = set()
+        member_three: set[str] = set()
+
+        # each string is converted into set of characters to find intersection of sets
+        # time complexity of O(n)
         member_one.update(FILE_CONTENTS[i])
         member_two.update(FILE_CONTENTS[i+1])
         member_three.update(FILE_CONTENTS[i+2])
+
+        # has time complexity of O(min(x,y,z)) where the value chosen is the smallest set
         intersection_set: set[str] = member_one.intersection(member_two, member_three)
 
+        # you can't query a set if you don't know existing values
+        # instead must loop through all the values in the set which we know is one
+        # since amount of values in here is always one this is actually
+        # O(1) time complexity
         for k in intersection_set:
             total_score += LOOK_UP_TABLE[k]
 
-        
-        intersection_set = set()
-        member_one = set()
-        member_two = set()
-        member_three = set()
-    
     print(total_score)
 
 if __name__ == '__main__':
-    main()
+    print(timeit.Timer('main').timeit())

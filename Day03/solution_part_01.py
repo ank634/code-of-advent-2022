@@ -6,7 +6,7 @@ def get_file_input(file_name: str) -> list[str]:
     file_contents: list[str] = file_pointer.readlines()
     file_pointer.close()
 
-    return list[str](map(lambda x: x.rstrip('\n'), file_contents))
+    return list[str](map(lambda x: x.rstrip(), file_contents))
 
 def main() -> None:
     FILE_NAME: Final[str] = 'input.txt'
@@ -63,7 +63,7 @@ def main() -> None:
                                             'W' : 49,
                                             'X' : 50,
                                             'Y' : 51,
-                                            'Z' : 52,
+                                            'Z' : 52
                                             }
     
     
