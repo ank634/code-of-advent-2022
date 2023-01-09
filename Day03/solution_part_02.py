@@ -1,28 +1,16 @@
 from typing import Final, TextIO
 
-# return a list of sets
-# where each value in the set is a char in a string
-def get_file_input(file_name: str) -> list[set[str]]:
-    file_pointer: TextIO = open(file_name)
-    file_output: list[set[str]] = []
-    str_set: set[str] = set()
 
-    for file_content in file_pointer:
-        file_output.append(set().update(file_content))
-        
-    file_pointer.close()
+def get_file_contents(file_name: str) -> list[str]:
+    FILE_POINTER: Final[TextIO] = open(file_name)
+    FILE_CONTENTS: Final[list[str]] = FILE_POINTER.readlines()
+    FILE_POINTER.close()
 
-    return file_output
-
-    
+    return list[str](map(lambda x: x.rstrip(), FILE_CONTENTS))
 
 def main() -> None:
-    FILE_NAME: Final[str] = 'input.txt'
-    file_contents: list[set[str]] = get_file_input('input.txt')
-    print(file_contents)
-    
-    look_up_table: Final[dict[str, int]] = {
-                                            'a' : 1,
+    FILE_CONTENTS: Final[list[str]] = get_file_contents('input.txt')
+    LOOK_UP_TABLE: Final[dict[str, int]] = {                                            'a' : 1,
                                             'b' : 2,
                                             'c' : 3,
                                             'd' : 4,
@@ -73,9 +61,32 @@ def main() -> None:
                                             'W' : 49,
                                             'X' : 50,
                                             'Y' : 51,
-                                            'Z' : 52,
+                                            'Z' : 52
                                             }
 
+    total_score: int = 0
+    member_one: set[str] = set()
+    member_two: set[str] = set()
+    member_three: set[str] = set()
+
+    print(FILE_CONTENTS[0])
+
+    for i in range(0, len(FILE_CONTENTS)-2, 3):
+        member_one.update(FILE_CONTENTS[i])
+        member_two.update(FILE_CONTENTS[i+1])
+        member_three.update(FILE_CONTENTS[i+2])
+        intersection_set: set[str] = member_one.intersection(member_two, member_three)
+
+        for k in intersection_set:
+            total_score += LOOK_UP_TABLE[k]
+
+        
+        intersection_set = set()
+        member_one = set()
+        member_two = set()
+        member_three = set()
+    
+    print(total_score)
 
 if __name__ == '__main__':
     main()
