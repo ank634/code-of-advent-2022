@@ -26,7 +26,7 @@ def rearrange_stacks(parsed_command: list[int], stacks: list[list[str]]) -> None
     stacks[move_to].extend(values_moved)
 
     # delete moved values from the moved from list
-    for i in range(move_amount):
+    for _ in range(move_amount):
        stacks[move_from].pop()
     
     
