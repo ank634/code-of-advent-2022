@@ -20,10 +20,6 @@ class File:
         return NotImplemented
 
 
-def parse_file(split_command: list[str]) -> File:
-    return File(split_command[1], int(split_command[0]))
-
-
 def main() -> None:
     FILE_NAME: str = '/Users/emmanuelbastidas/Documents/Programming Projects/Python projects/code_of_advent_2022/Day07/input.txt'
     FILE_CONTENT: Final[list[str]] = utils.get_file_contents(FILE_NAME)
@@ -49,7 +45,7 @@ def main() -> None:
         # if the value command read is one showing a file NOT A DIRECTORY
         # propage value up directory tree
         elif split_command_line[0] != '$' and split_command_line[0] != 'dir':
-            child: File = parse_file(split_command_line)
+            child: File = File(split_command_line[1], int(split_command_line[0]))
             for i in LAST_FILES:
                 i.size += child.size
 
@@ -80,14 +76,6 @@ def main() -> None:
     print(min(possible_values))
     
     
-        
-
-
-
-    
-
-
-
 if __name__ == '__main__':
     if __package__ is None:
         import sys
